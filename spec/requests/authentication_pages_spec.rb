@@ -131,5 +131,20 @@ describe "Authentication" do
 				specify { response.should redirect_to(root_path) }
 			end
 		end
+
+		describe "as admin user" do
+			let(:admin) { FactoryGirl.create(:admin) }
+
+			before { sign_in admin }
+
+			describe "submitting a DELETE request of himself" do
+				before do
+					@count = User.count
+					delete user_path(admin)
+				end
+				specify { User.count.should == @count }
+				specify { User.find(admin).valid? }
+			end
+		end
 	end
 end
