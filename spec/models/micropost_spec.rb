@@ -26,4 +26,5 @@ describe Micropost do
 		before { @micropost.user_id = nil }
 		it { should_not be_valid }
 	end
+
 end
